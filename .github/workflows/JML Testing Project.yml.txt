@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order Request Form</title>
+
+<style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family:Arial, Helvetica, sans-serif;
+    }
+
+    body{
+        background:#f4f6f9;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        min-height:100vh;
+        padding:30px;
+    }
+
+    .container{
+        background:#fff;
+        width:700px;
+        padding:35px;
+        border-radius:10px;
+        box-shadow:0 5px 15px rgba(0,0,0,0.15);
+    }
+
+    h2{
+        text-align:center;
+        margin-bottom:25px;
+        color:#003366;
+    }
+
+    .form-group{
+        margin-bottom:18px;
+    }
+
+    label{
+        display:block;
+        margin-bottom:6px;
+        font-weight:bold;
+        color:#333;
+    }
+
+    input,
+    textarea{
+        width:100%;
+        padding:10px;
+        border:1px solid #ccc;
+        border-radius:6px;
+        font-size:15px;
+    }
+
+    textarea{
+        resize:vertical;
+    }
+
+    .checkbox-group{
+        display:flex;
+        align-items:center;
+        gap:10px;
+        margin-bottom:15px;
+    }
+
+    .checkbox-group input{
+        width:auto;
+    }
+
+    button{
+        width:100%;
+        padding:12px;
+        background:#0056b3;
+        color:white;
+        border:none;
+        border-radius:6px;
+        font-size:16px;
+        cursor:pointer;
+    }
+
+    button:hover{
+        background:#003d80;
+    }
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Customer Order Request</h2>
+
+<form>
+
+<div class="form-group">
+<label>Quantity (Metric Ton)</label>
+<input type="number" step="0.01" placeholder="Enter Quantity">
+</div>
+
+<div class="form-group">
+<label>Company Name</label>
+<input type="text" placeholder="Enter Company Name">
+</div>
+
+<div class="form-group">
+<label>Order Person Name</label>
+<input type="text" placeholder="Enter Full Name">
+</div>
+
+<div class="form-group">
+<label>Contact Number</label>
+<input type="tel" placeholder="+8801XXXXXXXXX">
+</div>
+
+<div class="form-group">
+<label>Official Email Address</label>
+<input type="email" placeholder="example@company.com">
+</div>
+
+<div class="form-group">
+<label>Company Address</label>
+<textarea id="companyAddress" rows="3"></textarea>
+</div>
+
+<div class="checkbox-group">
+<input type="checkbox" id="sameAddress">
+<label for="sameAddress">Delivery Address is same as Company Address</label>
+</div>
+
+<div class="form-group">
+<label>Delivery Address</label>
+<textarea id="deliveryAddress" rows="3"></textarea>
+</div>
+
+<div class="form-group">
+<label>Expected Delivery Date</label>
+<input type="date">
+</div>
+
+<button type="submit">
+Submit Order
+</button>
+
+</form>
+
+</div>
+
+<script>
+const checkbox = document.getElementById("sameAddress");
+const companyAddress = document.getElementById("companyAddress");
+const deliveryAddress = document.getElementById("deliveryAddress");
+
+checkbox.addEventListener("change", function(){
+
+    if(this.checked){
+        deliveryAddress.value = companyAddress.value;
+        deliveryAddress.readOnly = true;
+    }else{
+        deliveryAddress.readOnly = false;
+        deliveryAddress.value = "";
+    }
+
+});
+
+companyAddress.addEventListener("input", function(){
+
+    if(checkbox.checked){
+        deliveryAddress.value = companyAddress.value;
+    }
+
+});
+</script>
+
+</body>
+</html>
